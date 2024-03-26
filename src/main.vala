@@ -19,7 +19,7 @@ int main(string[] argv) {
     var ui_str = "gui";
 
     GLib.OptionEntry[] entries = {
-        {"genre", 'g', GLib.OptionFlags.NONE, GLib.OptionArg.STRING, ref genre_str, "Genre to listen to"},
+        {"genre", 'g', GLib.OptionFlags.NONE, GLib.OptionArg.STRING, ref genre_str, "Genre to start listening to"},
         {"ui", 'u', GLib.OptionFlags.NONE, GLib.OptionArg.STRING, ref ui_str, "UI to run (cli or gui)"},
     };
 
@@ -43,7 +43,7 @@ int main(string[] argv) {
         int code = -1;
 
         if (ui_str == "cli") {
-            code = cli(player, ws, argv);
+            code = cli(player, ws);
         } else if (ui_str == "gui") {
             code = gui(player, ws, argv);
         }

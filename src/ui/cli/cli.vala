@@ -1,4 +1,4 @@
-public int cli(Player player, Websocket ws, string[] argv) {
+public int cli(Player player, Websocket ws) {
     // Allow JAP / KOR characters
     Intl.setlocale();
 

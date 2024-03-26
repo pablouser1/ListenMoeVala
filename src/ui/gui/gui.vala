@@ -11,6 +11,9 @@ private void home_window(Player player, Websocket ws, Gtk.Application app) {
     var win = new Gtk.ApplicationWindow(app);
     win.set_default_size(400, 200);
 
+    var header = new Gtk.HeaderBar();
+    win.set_titlebar(header);
+
     // Label
     var label = new Gtk.Label("Welcome to ListenMoeVala!");
     // Image
@@ -40,6 +43,7 @@ private void home_window(Player player, Websocket ws, Gtk.Application app) {
     
     // Main grid
     var grid = new Gtk.Grid();
+    grid.set_margin_top(5);
     grid.set_hexpand(true);
     grid.set_vexpand(true);
     grid.set_row_spacing(5);
@@ -78,5 +82,7 @@ private async void refresh_song(Song song, Gtk.Label label, Gtk.Picture img, Sou
         } catch (GLib.Error e) {
             error(e.message);
         }
+    } else {
+        img.set_paintable(null);
     }
 }

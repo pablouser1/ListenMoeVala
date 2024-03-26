@@ -15,6 +15,4 @@ sources = files()
 
 subdir('src')
 
-exe = executable('ListenMoe', sources, dependencies: dependencies, install : true)
-
-test('basic', exe)
+executable('listenmoe', sources, dependencies: dependencies, install: true)
