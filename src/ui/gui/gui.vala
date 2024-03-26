@@ -17,13 +17,15 @@ private void home_window(Player player, Websocket ws, Gtk.Application app) {
 
     // Label
     var label = new Gtk.Label("Welcome to ListenMoeVala!");
+    // Listeners
+    var listeners = new Gtk.Label("Listeners: 0");
     // Image
     var s = new Soup.Session();
     var img = new Gtk.Picture();
     img.set_can_shrink(true);
     img.set_size_request(128, 128);
     ws.on_new_song.connect((song) => {
-        refresh_song.begin(song, label, img, s);
+        refresh_song.begin(song, label, img, listeners, s);
     });
 
     ws.connect.begin();
@@ -53,15 +55,16 @@ private void home_window(Player player, Websocket ws, Gtk.Application app) {
     grid.attach(img, 1, 0);
     grid.attach(toggle, 0, 1);
     grid.attach(vol, 1, 1);
+    grid.attach(listeners, 2, 1);
     win.set_child(grid);
     win.present();
 }
 
-private async void refresh_song(Song song, Gtk.Label label, Gtk.Picture img, Soup.Session s) {
+private async void refresh_song(Data data, Gtk.Label label, Gtk.Picture img, Gtk.Label listeners, Soup.Session s) {
     // Handle label
-    var title = song.name();
-    var artist = song.artist();
-    var album = song.album();
+    var title = data.getName();
+    var artist = data.getArtist();
+    var album = data.getAlbum();
 
     var str = @"$title\nBy $artist";
 
@@ -70,6 +73,8 @@ private async void refresh_song(Song song, Gtk.Label label, Gtk.Picture img, Sou
     }
 
     label.set_text(str);
+
+    listeners.set_label(@"Listeners: $(data.getListeners())");
 
     // Handle image
     if (album != null && album.cover != null) {

@@ -3,7 +3,7 @@ public class Websocket {
     private Soup.WebsocketConnection? conn;
     private Json.Parser parser = new Json.Parser();
 
-    public signal void on_new_song(Song data);
+    public signal void on_new_song(Data data);
     private string url;
 
     public Websocket(string url) {
@@ -62,8 +62,9 @@ public class Websocket {
                     case 1:
                         // Getting data
                         var song = d.get_object_member("song");
+                        var listeners = d.get_int_member_with_default("listeners", 0);
                         if (song != null) {
-                            on_new_song(new Song(song));
+                            on_new_song(new Data(song, listeners));
                         }
                         break;
                 }

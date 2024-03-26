@@ -16,17 +16,17 @@ public int cli(Player player, Websocket ws) {
     return 0;
 }
 
-private void write_to_screen(Song song) {
+private void write_to_screen(Data data) {
     // Wipe screen
     print("\033[H\033[2J");
 
     print("Now playing:\n");
-    var title = song.name();
+    var title = data.getName();
     print(@"Title: $title\n");
 
-    var artist = song.artist();
+    var artist = data.getArtist();
     print(@"Artist: $artist\n");
-    var album = song.album();
+    var album = data.getAlbum();
     if (album != null) {
         print(@"Album: $(album.name)\n");
     }
