@@ -18,7 +18,6 @@ private void home_window(Player player, Websocket ws, Gtk.Application app) {
     var img = new Gtk.Picture();
     img.set_can_shrink(true);
     img.set_size_request(128, 128);
-
     ws.on_new_song.connect((song) => {
         refresh_song.begin(song, label, img, s);
     });
@@ -26,6 +25,19 @@ private void home_window(Player player, Websocket ws, Gtk.Application app) {
     ws.connect.begin();
     player.start();
 
+    // Controls
+    var toggle = new Gtk.Button();
+    toggle.set_label("Play / Pause");
+    toggle.clicked.connect(() => {
+        player.toggle();
+    });
+
+    var vol = new Gtk.Scale.with_range(Gtk.Orientation.HORIZONTAL, 0, 1, 0.1);
+    vol.set_value(player.vol);
+    vol.value_changed.connect(() => {
+        player.volume(vol.get_value());
+    });
+    
     // Main grid
     var grid = new Gtk.Grid();
     grid.set_hexpand(true);
@@ -34,6 +46,8 @@ private void home_window(Player player, Websocket ws, Gtk.Application app) {
     grid.set_column_spacing(5);
     grid.attach(label, 0, 0);
     grid.attach(img, 1, 0);
+    grid.attach(toggle, 0, 1);
+    grid.attach(vol, 1, 1);
     win.set_child(grid);
     win.present();
 }
