@@ -15,11 +15,11 @@ You should have the binary in `./builddir/ListenMoe`
 ```bash
 ./listenmoe -u gui -g jpop
 ```
-* -u: Pick a frontend (gui or cli)
-* -g: Pick a genre (jpop or kpop)
+* -u: Pick a frontend (gui or cli) Default: gui
+* -g: Pick a genre (jpop or kpop) Default: jpop
 
 ## TODO
-* Controls for both GUI and CLI
+* Controls for CLI
 * Improve GUI
 * Hot-swapping between JPop and Kpop
 
