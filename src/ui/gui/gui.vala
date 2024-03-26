@@ -9,6 +9,7 @@ public int gui(Player player, Websocket ws, string[] argv) {
 
 private void home_window(Player player, Websocket ws, Gtk.Application app) {
     var win = new Gtk.ApplicationWindow(app);
+    win.set_title("ListenMoe");
     win.set_default_size(400, 200);
 
     var header = new Gtk.HeaderBar();
